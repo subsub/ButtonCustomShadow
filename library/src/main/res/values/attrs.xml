@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BeautyButton">
+        <attr name="shadowRadius" format="dimension" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowXOffset" format="float" />
+        <attr name="shadowYOffset" format="float" />
+        <attr name="shadowPercentWidth" format="float" />
+        <attr name="shadowPercentHeight" format="float" />
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+</resources>
