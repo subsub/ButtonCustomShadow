@@ -7,15 +7,6 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.subsub.library.BeautyButton
         android:id="@+id/button1"
         android:layout_width="0dp"
@@ -33,7 +24,7 @@
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.6"
         app:shadowRadius="30dp"
-        app:shadowYOffset="10" />
+        app:shadowYOffset="14" />
 
     <com.subsub.library.BeautyButton
         android:id="@+id/button2"
@@ -48,11 +39,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button1"
-        app:shadowColor="@color/colorBlue"
+        app:shadowColor="@color/colorAccent"
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.75"
         app:shadowRadius="30dp"
-        app:shadowYOffset="10" />
+        app:shadowYOffset="14" />
 
     <com.subsub.library.BeautyButton
         android:id="@+id/button3"
@@ -71,6 +62,25 @@
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.9"
         app:shadowRadius="30dp"
-        app:shadowYOffset="10" />
+        app:shadowYOffset="14" />
+
+    <com.subsub.library.BeautyButton
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_round_30dp_yellow"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Button3"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button3"
+        app:shadowColor="@color/colorYellow"
+        app:shadowPercentHeight="0.7"
+        app:shadowPercentWidth="0.7"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="20"/>
 
 </android.support.constraint.ConstraintLayout>
