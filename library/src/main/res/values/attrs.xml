@@ -7,6 +7,5 @@
         <attr name="shadowYOffset" format="float" />
         <attr name="shadowPercentWidth" format="float" />
         <attr name="shadowPercentHeight" format="float" />
-        <attr name="cornerRadius" format="dimension" />
     </declare-styleable>
 </resources>

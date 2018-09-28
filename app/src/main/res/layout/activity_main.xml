@@ -17,20 +17,60 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.subsub.library.BeautyButton
+        android:id="@+id/button1"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="#00000000"
-        android:elevation="20dp"
-        app:cornerRadius="8dp"
+        android:text="Halo"
+        android:elevation="10dp"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="14"
+        app:shadowPercentWidth="0.75"
+        app:shadowPercentHeight="0.7"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        app:shadowColor="@color/colorPrimary"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shadowColor="@color/colorShadow"
-        app:shadowPercentHeight="0.8"
-        app:shadowPercentWidth="0.95"
-        app:shadowRadius="50dp"
-        app:shadowXOffset="10"
-        app:shadowYOffset="7" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.subsub.library.BeautyButton
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Halo"
+        android:elevation="10dp"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="14"
+        app:shadowPercentWidth="0.75"
+        app:shadowPercentHeight="0.7"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        app:shadowColor="@color/colorPrimary"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button1"/>
+
+    <com.subsub.library.BeautyButton
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Halo"
+        android:elevation="10dp"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="14"
+        app:shadowPercentWidth="0.75"
+        app:shadowPercentHeight="0.7"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        app:shadowColor="@color/colorPrimary"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button2"/>
 
 </android.support.constraint.ConstraintLayout>
