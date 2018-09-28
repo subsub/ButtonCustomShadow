@@ -2,6 +2,8 @@
 
 ## Latest Version: `1.0.0`
 
+![](ss.png)
+
 ## Usage
 Add dependency into app build.gradle
 ```
