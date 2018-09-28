@@ -2,7 +2,7 @@
 
 ## Latest Version: `1.0.0`
 
-![](ss.png)
+![](screenshot.png)
 
 ## Usage
 Add dependency into app build.gradle
