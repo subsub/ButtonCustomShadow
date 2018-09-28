@@ -4,15 +4,15 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.RECTANGLE
+import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
-import android.widget.TextView
 
 /**
  * Created by subkhansarif on 26/09/18
  **/
 
-class BeautyButton : TextView {
+class BeautyButton : AppCompatTextView {
 
     private var centerX: Float = 100f
     private var centerY: Float = 100f
@@ -63,11 +63,6 @@ class BeautyButton : TextView {
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyleAttrs: Int) : super(context, attributeSet, defStyleAttrs) {
-        getAttributes(attributeSet)
-        init()
-    }
-
-    constructor(context: Context, attributeSet: AttributeSet, defStyleAttrs: Int, defStyleRes: Int) : super(context, attributeSet, defStyleAttrs, defStyleRes) {
         getAttributes(attributeSet)
         init()
     }

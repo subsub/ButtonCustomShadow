@@ -33,7 +33,7 @@
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.6"
         app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        app:shadowYOffset="10" />
 
     <com.subsub.library.BeautyButton
         android:id="@+id/button2"
@@ -48,11 +48,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button1"
-        app:shadowColor="@color/colorAccent"
+        app:shadowColor="@color/colorBlue"
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.75"
         app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        app:shadowYOffset="10" />
 
     <com.subsub.library.BeautyButton
         android:id="@+id/button3"
@@ -71,6 +71,6 @@
         app:shadowPercentHeight="0.7"
         app:shadowPercentWidth="0.9"
         app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        app:shadowYOffset="10" />
 
 </android.support.constraint.ConstraintLayout>

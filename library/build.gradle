@@ -1,10 +1,36 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+
+group = "com.subsub.libs"
+def versi = "1.0.0"
+def libid = "buttoncustomshadow"
+def libname = "Button Custom Shadow"
+def libdesc = "Button with beautiful customisable shadow"
+def librepo = "https://github.com/subsub/ButtonCustomShadow"
+def devid = "subsub"
+def devname = "Subkhan Sarif"
+def devemail = "subkhansarif@gmail.com"
+version = versi
 
 android {
+    signingConfigs {
+        release {
+            keyAlias System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+            storeFile file(String.valueOf(System.getenv("SIGNING_KEYSTORE")))
+            storePassword System.getenv("SIGNING_STORE_PASSWORD")
+        }
+
+        debug {
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+            storeFile file("~/.android/debug.keystore")
+            storePassword "android"
+        }
+    }
+
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 21
@@ -36,4 +62,81 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id devid
+            name devname
+            email devemail
+        }
+    }
+
+    scm {
+        url librepo
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+    publications = ['customShadow']
+    pkg {
+        repo = 'maven'
+        name = libid
+        userOrg = user
+        licenses = ['Apache-2.0']
+        vcsUrl = librepo
+        version {
+            name = versi
+            desc = libdesc
+            released = new Date()
+            vcsTag = versi
+        }
+    }
+}
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+publishing {
+    publications {
+        customShadow(MavenPublication) {
+            artifact sourceJar
+            artifact "$buildDir/outputs/aar/library-release.aar"
+            groupId group
+            artifactId libid
+            version versi
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', libdesc)
+                root.appendNode('name', libname)
+                root.appendNode('url', librepo)
+                root.children().last() + pomConfig
+
+                def dependenciesNode = asNode().appendNode('dependencies')
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included.
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
 }
