@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.RECTANGLE
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
@@ -45,13 +46,13 @@ class BeautyButton : AppCompatTextView {
     private lateinit var leftRect: Rect
     private lateinit var leftGradient: GradientDrawable
 
-    private var myElevation: Float = 0f
-    private var customShadowColor: Int = 0
-    private var customShadowRadius: Float = 100f
-    private var xOffset: Float = 0f
-    private var yOffset: Float = 0f
-    private var shadowHeight: Float = 1f
-    private var shadowWidth: Float = 1f
+    private var myElevation = 0f
+    private var customShadowColor = 0
+    private var customShadowRadius = 100f
+    private var xOffset = 0f
+    private var yOffset = 0f
+    private var shadowHeight = 1f
+    private var shadowWidth = 1f
 
     constructor(context: Context) : super(context) {
         init()
@@ -75,15 +76,23 @@ class BeautyButton : AppCompatTextView {
 
         gravity = Gravity.CENTER
 
-        topLeftCornerRect = Rect(0, 0, customShadowRadius.toInt(), customShadowRadius.toInt())
-        topRect = Rect(0, 0, (width - customShadowRadius * 2 + myElevation * 2 - ((1 - shadowWidth) * width)).toInt(), customShadowRadius.toInt())
-        topRightCornerRect = Rect(0, 0, customShadowRadius.toInt(), customShadowRadius.toInt())
-        rightRect = Rect(0, 0, customShadowRadius.toInt(), (height - customShadowRadius * 2 + myElevation * 2 - (1 - shadowHeight) * height).toInt())
-        bottomRightCornerRect = Rect(0, 0, customShadowRadius.toInt(), customShadowRadius.toInt())
-        bottomRect = Rect(0, 0, (width - customShadowRadius * 2 + myElevation * 2 - ((1 - shadowWidth) * width)).toInt(), customShadowRadius.toInt())
-        bottomLeftCornerRect = Rect(0, 0, customShadowRadius.toInt(), customShadowRadius.toInt())
-        leftRect = Rect(0, 0, customShadowRadius.toInt(), (height - customShadowRadius * 2 + myElevation * 2 - (1 - shadowHeight) * height).toInt())
+        with(customShadowRadius) {
+            topLeftCornerRect = Rect(0, 0, toInt(), toInt())
+            topRect = Rect(0, 0, (width - customShadowRadius * 2 + myElevation * 2
+                    - ((1 - shadowWidth) * width)).toInt(), toInt())
 
+            topRightCornerRect = Rect(0, 0, toInt(), toInt())
+            rightRect = Rect(0, 0, toInt(), (height - customShadowRadius * 2 + myElevation * 2
+                    - (1 - shadowHeight) * height).toInt())
+
+            bottomRightCornerRect = Rect(0, 0, toInt(), toInt())
+            bottomRect = Rect(0, 0, (width - customShadowRadius * 2 + myElevation * 2
+                    - ((1 - shadowWidth) * width)).toInt(), toInt())
+
+            bottomLeftCornerRect = Rect(0, 0, toInt(), toInt())
+            leftRect = Rect(0, 0, toInt(), (height - customShadowRadius * 2 + myElevation * 2
+                    - (1 - shadowHeight) * height).toInt())
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -108,31 +117,42 @@ class BeautyButton : AppCompatTextView {
 
     private fun init() {
 
-        paint = Paint()
+        paint = Paint().apply {
+            color = Color.BLUE
+            style = Paint.Style.FILL_AND_STROKE
+        }
+
         mainRect = Rect()
         shadowRect = Rect()
-
-        paint.color = Color.BLUE
-        paint.style = Paint.Style.FILL_AND_STROKE
 
         initGradient()
     }
 
     private fun getAttributes(attr: AttributeSet) {
-        val styles = context.obtainStyledAttributes(attr, R.styleable.BeautyButton)
 
         myElevation = elevation
         elevation = 0f
-        customShadowRadius = styles.getDimension(R.styleable.BeautyButton_shadowRadius, myElevation + (2 * resources.displayMetrics.density))
-        if (customShadowRadius <= myElevation) customShadowRadius = myElevation + (2 * resources.displayMetrics.density)
-        customShadowColor = styles.getColor(R.styleable.BeautyButton_shadowColor, resources.getColor(R.color.colorDefaultShadowColor))
-        xOffset = styles.getFloat(R.styleable.BeautyButton_shadowXOffset, 0f)
-        yOffset = styles.getFloat(R.styleable.BeautyButton_shadowYOffset, 0f)
-        shadowHeight = styles.getFloat(R.styleable.BeautyButton_shadowPercentHeight, 1f)
-        shadowWidth = styles.getFloat(R.styleable.BeautyButton_shadowPercentWidth, 1f)
-        background = background ?: resources.getDrawable(R.drawable.default_background)
 
-        styles.recycle()
+        with(context.obtainStyledAttributes(attr, R.styleable.BeautyButton)) {
+            customShadowRadius = getDimension(R.styleable.BeautyButton_shadowRadius,
+                    myElevation + (2 * resources.displayMetrics.density))
+
+            if (customShadowRadius <= myElevation)
+                customShadowRadius = myElevation + (2 * resources.displayMetrics.density)
+
+            customShadowColor = getColor(R.styleable.BeautyButton_shadowColor,
+                    ContextCompat.getColor(context, R.color.colorDefaultShadowColor))
+
+            xOffset = getFloat(R.styleable.BeautyButton_shadowXOffset, 0f)
+            yOffset = getFloat(R.styleable.BeautyButton_shadowYOffset, 0f)
+
+            shadowHeight = getFloat(R.styleable.BeautyButton_shadowPercentHeight, 1f)
+            shadowWidth = getFloat(R.styleable.BeautyButton_shadowPercentWidth, 1f)
+
+            recycle()
+        }
+
+        background = background ?: ContextCompat.getDrawable(context, R.drawable.default_background)
     }
 
     override fun performClick(): Boolean {
@@ -152,154 +172,235 @@ class BeautyButton : AppCompatTextView {
     }
 
     private fun initTopLeftCorner() {
-        topLeftCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        topLeftCornerGradient.shape = RECTANGLE
-        topLeftCornerGradient.gradientType = GradientDrawable.RADIAL_GRADIENT
-        topLeftCornerGradient.gradientRadius = customShadowRadius
-        topLeftCornerGradient.setGradientCenter(1f, 1f)
+        topLeftCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.RADIAL_GRADIENT
+            gradientRadius = customShadowRadius
+            setGradientCenter(1f, 1f)
+        }
     }
 
     private fun initTop() {
-        topGradient = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        topGradient.shape = RECTANGLE
-        topGradient.gradientType = GradientDrawable.LINEAR_GRADIENT
-        topGradient.gradientRadius = customShadowRadius
+        topGradient = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.LINEAR_GRADIENT
+            gradientRadius = customShadowRadius
+        }
     }
 
     private fun initTopRightCorner() {
-        topRightCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        topRightCornerGradient.shape = RECTANGLE
-        topRightCornerGradient.gradientType = GradientDrawable.RADIAL_GRADIENT
-        topRightCornerGradient.gradientRadius = customShadowRadius
-        topRightCornerGradient.setGradientCenter(0f, 1f)
+        topRightCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.RADIAL_GRADIENT
+            gradientRadius = customShadowRadius
+            setGradientCenter(0f, 1f)
+        }
     }
 
     private fun initRight() {
-        rightGradient = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        rightGradient.shape = RECTANGLE
-        rightGradient.gradientType = GradientDrawable.LINEAR_GRADIENT
-        rightGradient.gradientRadius = customShadowRadius
+        rightGradient = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.LINEAR_GRADIENT
+            gradientRadius = customShadowRadius
+        }
     }
 
     private fun initBottomRightCorner() {
-        bottomRightCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        bottomRightCornerGradient.shape = RECTANGLE
-        bottomRightCornerGradient.gradientType = GradientDrawable.RADIAL_GRADIENT
-        bottomRightCornerGradient.gradientRadius = customShadowRadius
-        bottomRightCornerGradient.setGradientCenter(0f, 0f)
+        bottomRightCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.RADIAL_GRADIENT
+            gradientRadius = customShadowRadius
+            setGradientCenter(0f, 0f)
+        }
     }
 
     private fun initBottom() {
-        bottomGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        bottomGradient.shape = RECTANGLE
-        bottomGradient.gradientType = GradientDrawable.LINEAR_GRADIENT
-        bottomGradient.gradientRadius = customShadowRadius
+        bottomGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.LINEAR_GRADIENT
+            gradientRadius = customShadowRadius
+        }
     }
 
     private fun initBottomLeftCorner() {
-        bottomLeftCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        bottomLeftCornerGradient.shape = RECTANGLE
-        bottomLeftCornerGradient.gradientType = GradientDrawable.RADIAL_GRADIENT
-        bottomLeftCornerGradient.gradientRadius = customShadowRadius
-        bottomLeftCornerGradient.setGradientCenter(1f, 0f)
+        bottomLeftCornerGradient = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.RADIAL_GRADIENT
+            gradientRadius = customShadowRadius
+            setGradientCenter(1f, 0f)
+        }
     }
 
     private fun initLeft() {
-        leftGradient = GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, intArrayOf(customShadowColor, Color.TRANSPARENT))
-        leftGradient.shape = RECTANGLE
-        leftGradient.gradientType = GradientDrawable.LINEAR_GRADIENT
-        leftGradient.gradientRadius = customShadowRadius
+        leftGradient = GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,
+                intArrayOf(customShadowColor, Color.TRANSPARENT)).apply {
+            shape = RECTANGLE
+            gradientType = GradientDrawable.LINEAR_GRADIENT
+            gradientRadius = customShadowRadius
+        }
     }
 
-    private fun enableOutsideBound(canvas: Canvas) {
-        canvas.getClipBounds(shadowRect)
+    private fun enableOutsideBound(canvas: Canvas) = with(canvas) {
+        getClipBounds(shadowRect)
         shadowRect.inset((-myElevation - xOffset).toInt(), (-myElevation - yOffset).toInt())
-        canvas.clipRect(shadowRect, Region.Op.REPLACE)
+        clipRect(shadowRect, Region.Op.REPLACE)
     }
 
     private fun drawTopLeftCorner(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        topLeftCornerGradient.bounds = topLeftCornerRect
-        canvas.translate(-myElevation + xOffset + percentX, -myElevation + yOffset + percentY)
-        topLeftCornerGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            topLeftCornerGradient.bounds = topLeftCornerRect
+
+            translate(-myElevation + xOffset + percentX, -myElevation + yOffset + percentY)
+
+            topLeftCornerGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawTop(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        topGradient.bounds = topRect
-        canvas.translate(customShadowRadius - myElevation + xOffset + percentX, -myElevation + yOffset + percentY)
-        topGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            topGradient.bounds = topRect
+
+            translate(customShadowRadius - myElevation + xOffset + percentX,
+                    -myElevation + yOffset + percentY)
+
+            topGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawTopRightCorner(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        topRightCornerGradient.bounds = topRightCornerRect
-        canvas.translate(width - customShadowRadius + myElevation + xOffset - percentX, -myElevation + yOffset + percentY)
-        topRightCornerGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            topRightCornerGradient.bounds = topRightCornerRect
+
+            translate(width - customShadowRadius + myElevation + xOffset - percentX,
+                    -myElevation + yOffset + percentY)
+
+            topRightCornerGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawRight(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        rightGradient.bounds = rightRect
-        canvas.translate(width - customShadowRadius + myElevation + xOffset - percentX, customShadowRadius - myElevation + yOffset + percentY)
-        rightGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            rightGradient.bounds = rightRect
+
+            translate(width - customShadowRadius + myElevation + xOffset - percentX,
+                    customShadowRadius - myElevation + yOffset + percentY)
+
+            rightGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawBottomRightCorner(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        bottomRightCornerGradient.bounds = bottomRightCornerRect
-        canvas.translate(width - customShadowRadius + myElevation + xOffset - percentX, height - customShadowRadius + myElevation + yOffset - percentY)
-        bottomRightCornerGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            bottomRightCornerGradient.bounds = bottomRightCornerRect
+
+            translate(width - customShadowRadius + myElevation + xOffset - percentX,
+                    height - customShadowRadius + myElevation + yOffset - percentY)
+
+            bottomRightCornerGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawBottom(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        bottomGradient.bounds = bottomRect
-        canvas.translate(customShadowRadius - myElevation + xOffset + percentX, height - customShadowRadius + myElevation + yOffset - percentY)
-        bottomGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            bottomGradient.bounds = bottomRect
+
+            translate(customShadowRadius - myElevation + xOffset + percentX,
+                    height - customShadowRadius + myElevation + yOffset - percentY)
+
+            bottomGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawBottomLeftCorner(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        bottomLeftCornerGradient.bounds = bottomLeftCornerRect
-        canvas.translate(-myElevation + xOffset + percentX, height - customShadowRadius + myElevation + yOffset - percentY)
-        bottomLeftCornerGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            bottomLeftCornerGradient.bounds = bottomLeftCornerRect
+
+            translate(-myElevation + xOffset + percentX,
+                    height - customShadowRadius + myElevation + yOffset - percentY)
+
+            bottomLeftCornerGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawLeft(canvas: Canvas) {
         val percentX = (1 - shadowWidth) * width / 2
         val percentY = (1 - shadowHeight) * height / 2
-        canvas.save()
-        leftGradient.bounds = leftRect
-        canvas.translate(-myElevation + xOffset + percentX, customShadowRadius - myElevation + yOffset + percentY)
-        leftGradient.draw(canvas)
-        canvas.restore()
+
+        with(canvas) {
+            save()
+
+            leftGradient.bounds = leftRect
+
+            translate(-myElevation + xOffset + percentX,
+                    customShadowRadius - myElevation + yOffset + percentY)
+
+            leftGradient.draw(this)
+
+            restore()
+        }
     }
 
     private fun drawButtonBackground(canvas: Canvas) {
-        canvas.save()
-        background.draw(canvas)
-        canvas.restore()
+        with(canvas) {
+            save()
+            background.draw(this)
+            restore()
+        }
     }
 }
