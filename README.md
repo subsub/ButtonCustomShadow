@@ -1,6 +1,10 @@
+[ ![Download](https://api.bintray.com/packages/subsub/maven/buttoncustomshadow/images/download.svg) ](https://bintray.com/subsub/maven/buttoncustomshadow/_latestVersion)
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Beauty%20Color%20Shadow%20Button-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7165)
+
+
 # Beauty Shadow Button
 
-## Latest Version: `1.0.0`
 
 ![](screenshot.png)
 
