@@ -3,8 +3,8 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Beauty%20Color%20Shadow%20Button-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7165)
 
 # What's New (1.1.0)
-* - Beauty Layout, so you can make beautiful shadow on layout *
-* - Accessible attributes through java/kotlin, so you can call custom shadow attributes inside your java/kotlin code *
+- **Beauty Layout, so you can make beautiful shadow on layout**
+- **Accessible attributes through java/kotlin, so you can call custom shadow attributes inside your java/kotlin code**
 
 
 
