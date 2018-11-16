@@ -39,23 +39,41 @@ See `app` module
 #### Add BeautyButton or BeautyLayout into layout
 ```xml
 <com.subsub.library.BeautyLayout
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_round_30dp_accent"
-        android:elevation="10dp"
-        android:padding="10dp"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shadowColor="@color/colorAccent"
-        app:shadowPercentHeight="0.7"
-        app:shadowPercentWidth="0.75"
-        app:shadowRadius="30dp"
-        app:shadowYOffset="14"
-        app:text="Button" />
+    android:id="@+id/l_layout"
+    android:layout_width="0dp"
+    android:layout_height="150dp"
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_round_30dp_blue"
+    android:elevation="15dp"
+    android:padding="10dp"
+    android:textColor="@color/colorWhite"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:shadowColor="@color/colorDarkBlue"
+    app:shadowPercentHeight="0.8"
+    app:shadowPercentWidth="0.8"
+    app:shadowRadius="30dp"
+    app:shadowYOffset="30"
+    app:text="Button1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Some other views" />
+    </LinearLayout>
+</com.subsub.library.BeautyLayout>
 ```
 
 
