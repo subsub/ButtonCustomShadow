@@ -7,80 +7,98 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
-    <com.subsub.library.BeautyButton
-        android:id="@+id/button1"
+    <fragment
+        android:id="@+id/main_nav_host"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_round_30dp_primary"
-        android:elevation="10dp"
-        android:padding="10dp"
-        android:text="Button1"
-        android:textColor="@color/colorWhite"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/control_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shadowColor="@color/colorPrimary"
-        app:shadowPercentHeight="0.7"
-        app:shadowPercentWidth="0.6"
-        app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        app:navGraph="@navigation/nav_graph" />
 
-    <com.subsub.library.BeautyButton
-        android:id="@+id/button2"
+    <LinearLayout
+        android:id="@+id/control_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_round_30dp_accent"
-        android:elevation="10dp"
-        android:padding="10dp"
-        android:text="Button2"
-        android:textColor="@color/colorWhite"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button1"
-        app:shadowColor="@color/colorAccent"
-        app:shadowPercentHeight="0.7"
-        app:shadowPercentWidth="0.75"
-        app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <com.subsub.library.BeautyButton
-        android:id="@+id/button3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_round_30dp_blue"
-        android:elevation="10dp"
-        android:padding="10dp"
-        android:text="Button3"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2"
-        app:shadowColor="@color/colorBlue"
-        app:shadowPercentHeight="0.7"
-        app:shadowPercentWidth="0.9"
-        app:shadowRadius="30dp"
-        app:shadowYOffset="14" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elevation" />
 
-    <com.subsub.library.BeautyButton
-        android:id="@+id/button4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_round_30dp_yellow"
-        android:elevation="10dp"
-        android:padding="10dp"
-        android:text="Button3"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button3"
-        app:shadowColor="@color/colorYellow"
-        app:shadowPercentHeight="0.7"
-        app:shadowPercentWidth="0.7"
-        app:shadowRadius="30dp"
-        app:shadowYOffset="20"/>
+        <SeekBar
+            android:id="@+id/elevation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shadow Radius" />
+
+        <SeekBar
+            android:id="@+id/shadow_radius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Offset" />
+
+        <SeekBar
+            android:id="@+id/x_offset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Y Offset" />
+
+        <SeekBar
+            android:id="@+id/y_offset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shadow Height (%)" />
+
+        <SeekBar
+            android:id="@+id/shadow_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shadow Width (%)" />
+
+        <SeekBar
+            android:id="@+id/shadow_width"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
