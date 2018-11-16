@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.subsub.library.BeautyButton
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_round_30dp_accent"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="@color/colorAccent"
+        app:shadowPercentHeight="0.7"
+        app:shadowPercentWidth="0.75"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="14"
+        app:text="Button" />
+
+</android.support.constraint.ConstraintLayout>
