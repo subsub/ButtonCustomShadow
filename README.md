@@ -36,9 +36,9 @@ buildscript{
 ## Sample
 See `app` module
 
-#### Add BeautyButton into layout
+#### Add BeautyButton or BeautyLayout into layout
 ```xml
-<com.subsub.library.BeautyButton
+<com.subsub.library.BeautyLayout
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="50dp"
