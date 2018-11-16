@@ -1,15 +1,14 @@
-[ ![Download](https://api.bintray.com/packages/subsub/maven/buttoncustomshadow/images/download.svg) ](https://bintray.com/subsub/maven/buttoncustomshadow/_latestVersion)
-
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Beauty%20Color%20Shadow%20Button-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7165)
 
 
 # Beauty Shadow Button
 
 
-![](screenshot.png)
+![](screenshot.mp4)
 
 ## Usage
 Add dependency into app build.gradle
+latest version: [ ![Download](https://api.bintray.com/packages/subsub/maven/buttoncustomshadow/images/download.svg) ](https://bintray.com/subsub/maven/buttoncustomshadow/_latestVersion)
 ```
 compile "com.subsub.libs:buttoncustomshadow:{latestVersion}"
 ```
@@ -31,23 +30,23 @@ See `app` module
 #### Add BeautyButton into layout
 ```xml
 <com.subsub.library.BeautyButton
-    android:id="@+id/button1"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    android:background="@drawable/bg_round_30dp_primary"
-    android:elevation="10dp"
-    android:padding="10dp"
-    android:text="Button1"
-    android:textColor="@color/colorWhite"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:shadowColor="@color/colorPrimary"
-    app:shadowPercentHeight="0.7"
-    app:shadowPercentWidth="0.6"
-    app:shadowRadius="30dp"
-    app:shadowYOffset="10" />
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_round_30dp_accent"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="@color/colorAccent"
+        app:shadowPercentHeight="0.7"
+        app:shadowPercentWidth="0.75"
+        app:shadowRadius="30dp"
+        app:shadowYOffset="14"
+        app:text="Button" />
 ```
 
 
@@ -60,4 +59,25 @@ Name | Type | Description
 `shadowYOffset` | Float | Sets shadow vertical (y) position relative to the view.
 `shadowPercentWidth` | Float | Sets the percentage of shadow's width relative to the button width. Value is between 0 and 1, with 0 being 0% and 1 being 100% (shadow width = button width)
 `shadowPercentHeight` | Float | Sets the percentage of shadow's height relative to the button height. Value is between 0 and 1, with 0 being 0% and 1 being 100% (shadow height = button height)
-  
+
+#### Accessing attributes from java
+All custom attributes can be accessed through java like below:
+```
+// set elevation
+button.myElevation = activity.viewElevation
+
+// set shadow radius
+button.customShadowRadius = activity.viewShadowRadius
+
+// set xOffset
+button.xOffset = activity.viewXOffset
+
+// set yOffset
+button.yOffset = activity.viewYOffset
+
+// set percent height
+button.shadowHeight = activity.viewShadowHeight
+
+// set percent width
+button.shadowWidth = activity.viewShadowWidth
+```
