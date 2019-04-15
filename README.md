@@ -1,6 +1,13 @@
+>**_NOTE:_**  This library currently only works for Android API 27 and **LOWER**. Tested on Android.O and Android.L
+
 [ ![Download](https://api.bintray.com/packages/subsub/maven/buttoncustomshadow/images/download.svg) ](https://bintray.com/subsub/maven/buttoncustomshadow/_latestVersion)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Beauty%20Color%20Shadow%20Button-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7165)
+
+
+
+# What's New (1.1.1)
+- **Fix crash on Android.P (28), but shadow won't appear because of limitation to draw outside view bound**
 
 # What's New (1.1.0)
 - **Beauty Layout, so you can make beautiful shadow on layout**

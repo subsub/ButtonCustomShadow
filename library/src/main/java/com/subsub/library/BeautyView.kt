@@ -3,9 +3,10 @@ package com.subsub.library
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 
 /**
  * Created by subkhansarif on 09/11/18
@@ -322,7 +323,9 @@ abstract class BeautyView : FrameLayout {
     private fun enableOutsideBound(canvas: Canvas) = with(canvas) {
         getClipBounds(shadowRect)
         shadowRect.inset((-myElevation - xOffset).toInt(), (-myElevation - yOffset).toInt())
-        clipRect(shadowRect, Region.Op.REPLACE)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            clipRect(shadowRect, Region.Op.REPLACE)
+        }
     }
 
     private fun drawCenter(canvas: Canvas) {
